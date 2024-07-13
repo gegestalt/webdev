@@ -24,7 +24,7 @@ main {
 
 /* Card styles */
 .card {
-    background-color: #ffffff; /* White background */
+    background-color: #f0f0f0; /* Slightly darker background */
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -51,7 +51,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    background-color: #f0f0f0; /* Light grey background for inputs */
+    background-color: #ffffff; /* White background for inputs */
     color: #333333; /* Dark text color */
 }
 
@@ -112,14 +112,4 @@ textarea:focus {
 
 .forgot-password a:hover {
     text-decoration: underline;
-}
-
-/* Flex container for half-width elements */
-.flex-container {
-    display: flex;
-    gap: 1rem;
-}
-
-.half-width {
-    flex: 1;
 }
