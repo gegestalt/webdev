@@ -1,48 +1,58 @@
-<%-  include('../includes/head',{pageTitle:'SignUp' })%>
+<%- include('../includes/head', { pageTitle: 'SignUp' }) %>
+
+<link rel="stylesheet" href="/styles/signup.css">
 </head>
 <body>
-    <%-  include('../includes/header')%>
+    <%- include('../includes/header') %>
     <main>
-        <h1> Create a new Account </h1>
-        <form action="" method="">
-             <p>
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
-             </p>
-             <p>
-                <label for="email"> Confirm   E-mail</label>
-                <input type="email" id="confirm-email" name="confirm-email " required>
-             </p> 
-             <p>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required minlength="8">
-             </p>
-             <hr>
-             <p>
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" required>
-             </p>
-             <p>
-                <label for="street">Street</label>
-                <input type="text" id="street" name="street" required>
-             </p>
-             <p>
-                <label for="postal">Full Name</label>
-                <input type="text" id="postal" name="postal" required minlength="5" maxlength="6">
-             </p>
-             <p>
-                
-             </p>
-
-                <p>
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
-             </p>
-             <button class="btn">
-                Create Account
-             </button>
-             <p id="switch-form">
-                <a href="/login">Already have an account? Login</a></p>
-        </form> 
+        <h1>Create a new Account</h1>
+        <div class="card-container">
+            <div class="card">
+                <form action="" method="">
+                    <p>
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required class="mui-input">
+                    </p>
+                    <p>
+                        <label for="confirm-email">Confirm E-mail</label>
+                        <input type="email" id="confirm-email" name="confirm-email" required class="mui-input">
+                    </p>
+                    <p>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required minlength="8" class="mui-input">
+                    </p>
+                </form>
+            </div>
+            <div class="card">
+                <form action="" method="">
+                    <p>
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required class="mui-input">
+                    </p>
+                    <p>
+                        <label for="street">Street</label>
+                        <input type="text" id="street" name="street" required class="mui-input">
+                    </p>
+                    <p>
+                        <label for="postal">Postal Code</label>
+                        <input type="text" id="postal" name="postal" required minlength="5" maxlength="6" class="mui-input">
+                    </p>
+                    <p>
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required class="mui-input">
+                    </p>
+                    <div class="btn-container">
+                        <button class="btn">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p id="switch-form">
+            <a href="/login">Already have an account? Login</a>
+        </p>
     </main>
-<%-  include('../includes/footer') %>
+    <%- include('../includes/footer') %>
+</body>
+</html>
