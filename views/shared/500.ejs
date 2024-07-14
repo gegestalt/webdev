@@ -1,0 +1,17 @@
+<%- include('../includes/head', { pageTitle: 'An Error Occurred' }) %>
+<link rel="stylesheet" href="/styles/forms.css">
+</head>
+<body>
+    <%- include('../includes/header') %>
+    <main>
+        <h1>Something went wrong!</h1>
+        <div class="card">
+            <h2>Error Details</h2>
+            <p>We're sorry, but an unexpected error occurred. Please try again later or contact support if the problem persists.</p>
+            <p>Error Code: <span id="error-code"><%= errorCode %></span></p>
+            <p>Error Message: <span id="error-message"><%= errorMessage %></span></p>
+        </div>
+    </main>
+    <%- include('../includes/footer') %>
+</body>
+</html>
