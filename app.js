@@ -1,35 +1,35 @@
 const express = require('express');
-const csrf = require('csurf');
 const path = require('path');
-
-const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
+const csrf = require('csurf');
+const addCsrfToken = require('./middlewares/csrf-token');
 const authRoutes = require('./routes/auth.routes');
-const handleErrors = require('./middlewares/error-handling');
+const handleErrors = require('./middlewares/error-handler');
+const expressSession = require('express-session');
 const db = require('./data/database');
-
+const createSessionConfig = require('./config/session');
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(csrf()); // Activate as middleware 
-app.use(addCsrfTokenMiddleware); // Use own middleware to add csrf token to response
+app.use(expressSession(createSessionConfig()));
+app.use(csrf());
+app.use(addCsrfToken);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static('public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(authRoutes);
 
-// Error-handling middleware should be the last middleware
 app.use(handleErrors);
 
 db.connectToDatabase()
-    .then(function () {
+    .then(() => {
         app.listen(3000, () => {
             console.log('Server is running on port 3000');
         });
     })
-    .catch(function (error) {
-        console.log(error);
-        console.log('Unable to connect to database');
+    .catch(error => {
+        console.error('Unable to connect to database:', error);
     });
