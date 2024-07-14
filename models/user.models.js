@@ -12,6 +12,9 @@ class User {
             city: city
         };
     }
+    getUserWithSameEmail() {
+        return db.getDb().collection('users').findOne({ email:this.email});
+    }
 
     async signup() {
         try {
@@ -27,6 +30,9 @@ class User {
         } catch (error) {
             console.log(error);
         }
+    }
+    hasMatchingPassword(hashedPassword) {
+        return bcrypt.compare(this.password, hashedPassword);
     }
 }
 

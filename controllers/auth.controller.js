@@ -1,4 +1,5 @@
 const User = require('../models/user.models');
+const { get } = require('../routes/auth.routes');
 function getSignup(req, res) {
     res.render('customer/auth/signup');
 }
@@ -26,8 +27,21 @@ async function signup(req, res) {
     }
 }
 
+async function login(req, res) {
+    const user = new User(req.body.email, req.body.password);
+    constExistinguser =  user.getUserWithSameEmail();
+    if(!existingUser) {
+        return res.status(401).send('Invalid email or password');
+    }
+    const passwordMatch = await user.hasMatchingPassword(existingUser.password);
+    if(!passwordMatch) {
+        return res.status(401).send('Invalid email or password');
+    }
+}
+
+
 module.exports = {
-    getSignup,
-    getLogin,
-    signup
+    getSignup:getSignup,
+    getLogin:getLogin,
+    signup:signup,
 };
