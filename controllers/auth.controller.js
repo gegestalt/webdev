@@ -1,14 +1,13 @@
-
 const User = require('../models/user.models');
-
-function getSignup(req,res) {
+function getSignup(req, res) {
     res.render('customer/auth/signup');
 }
-function getLogin(req,res){
+
+function getLogin(req, res) {
     res.render('customer/auth/login');
-    
 }
-function signup(req,res){
+
+async function signup(req, res) {
     const user = new User(
         req.body.email,
         req.body.password,
@@ -17,12 +16,18 @@ function signup(req,res){
         req.body.postal,
         req.body.city
     );
-    user.signup();
-    res.redirect('/login');
+
+    try {
+        await user.signup();
+        res.redirect('/login');
+    } catch (error) {
+        console.error('Signup failed:', error);
+        res.status(500).send('Signup failed');
+    }
 }
 
 module.exports = {
-    getSignup: getSignup,
-    getLogin: getLogin,
-    signup: signup
+    getSignup,
+    getLogin,
+    signup
 };
