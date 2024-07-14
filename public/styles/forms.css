@@ -110,7 +110,7 @@ textarea:focus {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
-    gap: 1rem; /* Add gap between the links */
+    gap: 1rem; /* Add gap between the links */  
 }
 
 #switch-form, .forgot-password {
