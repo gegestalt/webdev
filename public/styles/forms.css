@@ -2,15 +2,15 @@
 
 /* Body and general styling */
 body {
-    background-color: #e0e0e0; /* Light grey background */
+    background-color: #2b2b2b; /* Dark grey background */
     font-family: Arial, sans-serif;
-    color: #333333; /* Dark text color */
+    color: #ffffff; /* Light text color */
     margin: 0;
     padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #333333; /* Dark text color */
+    color: #ffffff; /* Light text color */
 }
 
 /* Main container */
@@ -24,7 +24,7 @@ main {
 
 /* Card styles */
 .card {
-    background-color: #f0f0f0; /* Slightly darker background */
+    background-color: #3a3a3a; /* Slightly brighter dark grey background */
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -37,7 +37,7 @@ label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #333333; /* Dark text color */
+    color: #ffffff; /* Light text color */
 }
 
 input[type="text"],
@@ -51,8 +51,8 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    background-color: #ffffff; /* White background for inputs */
-    color: #333333; /* Dark text color */
+    background-color: #4a4a4a; /* Brighter dark grey background for inputs */
+    color: #ffffff; /* Light text color */
 }
 
 input[type="text"]:focus,
@@ -61,15 +61,26 @@ input[type="password"]:focus,
 input[type="number"]:focus,
 textarea:focus {
     outline: none;
-    border-color: #f76a05; /* Orange border color on focus */
-    box-shadow: 0 0 8px rgba(247, 106, 5, 0.6); /* Orange box shadow on focus */
+    border-color: #ff8c00; /* Brighter orange border color on focus */
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.6); /* Brighter orange box shadow on focus */
+}
+
+/* Flex container for postal code and city */
+.flex-container {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Half width for postal code and city inputs */
+.half-width {
+    flex: 1;
 }
 
 /* Orange separator */
 .orange-separator {
     border: none;
     height: 2px;
-    background-color: #f76a05; /* Orange color */
+    background-color: #ff8c00; /* Brighter orange color */
     margin: 20px 0;
 }
 
@@ -80,7 +91,7 @@ textarea:focus {
 }
 
 .btn {
-    background-color: #f76a05; /* Orange background color */
+    background-color: #ff8c00; /* Brighter orange background color */
     color: white;
     padding: 12px 24px;
     border: none;
@@ -91,25 +102,22 @@ textarea:focus {
 }
 
 .btn:hover {
-    background-color: #6c95c1; /* Darker blue on hover */
+    background-color: #ffb74d; /* Brighter orange on hover */
 }
 
-/* Forgot password link */
-.forgot-password {
-    list-style-type: none;
-    padding: 0;
-    text-align: center;
+/* Link container */
+.link-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem; /* Add gap between the links */
 }
 
-.forgot-password li {
-    margin-top: 10px;
-}
-
-.forgot-password a {
-    color: #f76a05; /* Orange color */
+#switch-form, .forgot-password {
+    color: #ff8c00; /* Brighter orange color */
     text-decoration: none;
 }
 
-.forgot-password a:hover {
+#switch-form:hover, .forgot-password:hover {
     text-decoration: underline;
 }
