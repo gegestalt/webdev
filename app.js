@@ -1,5 +1,9 @@
 const express = require('express');
+const csrf = require('csurf');
 const path = require('path');
+
+
+const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const authRoutes = require('./routes/auth.routes');
 const db = require('./data/database');
 
@@ -8,6 +12,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(csrf()); //activate as middleware 
+app.use(addCsrfTokenMiddleware)// use own middleware to add csrf token to response
 
 app.use(authRoutes);
 
