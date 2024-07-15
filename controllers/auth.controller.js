@@ -1,6 +1,7 @@
 const User = require('../models/user.models');
-const { get } = require('../routes/auth.routes');
+const authUtil = require('../util/authentication');  
 function getSignup(req, res) {
+    
     res.render('customer/auth/signup');
 }
 
@@ -24,7 +25,7 @@ async function signup(req, res) {
     } catch (error) {
         console.error('Signup failed:', error);
         res.status(500).send('Signup failed');
-    }
+    }          
 }
 
 async function login(req, res) {
@@ -37,6 +38,9 @@ async function login(req, res) {
     if(!passwordMatch) {
         return res.status(401).send('Invalid email or password');
     }
+    authUtil.createUserSession(req, existingUser, function(){
+        res.redirect('/');
+    } ); 
 }
 
 

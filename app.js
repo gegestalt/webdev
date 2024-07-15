@@ -3,6 +3,11 @@ const path = require('path');
 const csrf = require('csurf');
 const addCsrfToken = require('./middlewares/csrf-token');
 const authRoutes = require('./routes/auth.routes');
+const productRoutes = require('./routes/products.routes');
+const baseRoutes = require('./routes/base.routes');
+
+
+
 const handleErrors = require('./middlewares/error-handler');
 const expressSession = require('express-session');
 const db = require('./data/database');
@@ -20,8 +25,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(baseRoutes)
 app.use(authRoutes);
-
+app.use(productRoutes);
 app.use(handleErrors);
 
 db.connectToDatabase()

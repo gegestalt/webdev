@@ -12,7 +12,7 @@ class User {
             city: city
         };
     }
-    getUserWithSameEmail() {
+       getUserWithSameEmail() {
         return db.getDb().collection('users').findOne({ email:this.email});
     }
 
