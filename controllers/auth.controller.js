@@ -1,7 +1,7 @@
 const User = require('../models/user.models');
-const authUtil = require('../util/authentication');  
+const authUtil = require('../util/authentication');
+
 function getSignup(req, res) {
-    
     res.render('customer/auth/signup');
 }
 
@@ -10,14 +10,9 @@ function getLogin(req, res) {
 }
 
 async function signup(req, res) {
-    const user = new User(
-        req.body.email,
-        req.body.password,
-        req.body.fullname,
-        req.body.street,
-        req.body.postal,
-        req.body.city
-    );
+    const { email, password, fullname, street, postal, city } = req.body;
+
+    const user = new User(email, password, fullname, street, postal, city);
 
     try {
         await user.signup();
@@ -25,27 +20,55 @@ async function signup(req, res) {
     } catch (error) {
         console.error('Signup failed:', error);
         res.status(500).send('Signup failed');
-    }          
+    }
 }
 
 async function login(req, res) {
-    const user = new User(req.body.email, req.body.password);
-    constExistinguser =  user.getUserWithSameEmail();
-    if(!existingUser) {
-        return res.status(401).send('Invalid email or password');
+    const { email, password } = req.body; // Destructure email and password from req.body
+    const user = new User(email, password); // Use destructured variables
+    try {
+        const existingUser = await user.getUserWithSameEmail();
+
+        if (!existingUser) {
+            return res.status(401).render('shared/error', {
+                pageTitle: 'Authentication Error',
+                errorCode: 401,
+                errorMessage: 'Invalid email or password',
+                errorDetails: null
+            });
+        }
+
+        const passwordMatch = await user.hasMatchingPassword(password, existingUser.password);
+
+        if (!passwordMatch) {
+            return res.status(401).render('shared/error', {
+                pageTitle: 'Authentication Error',
+                errorCode: 401,
+                errorMessage: 'Invalid email or password',
+                errorDetails: null
+            });
+        }
+
+        authUtil.createUserSession(req, existingUser, function() {
+            res.redirect('/');
+        });
+
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).render('shared/error', {
+            pageTitle: 'Internal Server Error',
+            errorCode: 500,
+            errorMessage: 'Internal server error',
+            errorDetails: error.message
+        });
     }
-    const passwordMatch = await user.hasMatchingPassword(existingUser.password);
-    if(!passwordMatch) {
-        return res.status(401).send('Invalid email or password');
-    }
-    authUtil.createUserSession(req, existingUser, function(){
-        res.redirect('/');
-    } ); 
 }
 
 
+
 module.exports = {
-    getSignup:getSignup,
-    getLogin:getLogin,
-    signup:signup,
+    getSignup: getSignup,
+    getLogin: getLogin,
+    signup: signup,
+    login: login
 };

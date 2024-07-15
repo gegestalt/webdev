@@ -1,4 +1,15 @@
 <header>
-    <div><a href="/">WDE </a></div>
-    <nav> </nav>
+    <div><a href="/">Medikal Services Inc. </a></div>
+    <nav>
+        <ul>
+            <% if (locals.isAuthenticated) { %>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> <!-- Font Awesome icon for user -->
+                        Logout
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </nav>
 </header>

@@ -4,7 +4,7 @@ const db = require('../data/database');
 class User {
     constructor(email, password, fullname, street, postal, city) {
         this.email = email;
-        this.password = password;
+        this.password = password; 
         this.fullname = fullname;
         this.address = {
             street: street,
@@ -12,8 +12,9 @@ class User {
             city: city
         };
     }
-       getUserWithSameEmail() {
-        return db.getDb().collection('users').findOne({ email:this.email});
+
+    async getUserWithSameEmail() {
+        return db.getDb().collection('users').findOne({ email: this.email });
     }
 
     async signup() {
@@ -31,8 +32,9 @@ class User {
             console.log(error);
         }
     }
-    hasMatchingPassword(hashedPassword) {
-        return bcrypt.compare(this.password, hashedPassword);
+
+    async hasMatchingPassword(candidatePassword, hashedPassword) {
+        return bcrypt.compare(candidatePassword, hashedPassword);
     }
 }
 
