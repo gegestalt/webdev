@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const csrf = require('csurf');
 const addCsrfToken = require('./middlewares/csrf-token');
+const checkAuthStatus = require('./middlewares/check-auth');
 const authRoutes = require('./routes/auth.routes');
 const productRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
